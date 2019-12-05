@@ -1,6 +1,9 @@
 from BillWorker import BillWorker
 
 def do(start_date:str,end_date:str=""):
+    """
+    生产订单处理
+    """
     tb_h="T_PRD_MO" #单据头表
     tb_L="T_PRD_MO_L"
     tb_e="T_PRD_MOENTRY" #主单据体表

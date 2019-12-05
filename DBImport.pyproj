@@ -22,6 +22,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="bd.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="BillWorker.py">
       <SubType>Code</SubType>
     </Compile>
@@ -37,10 +40,19 @@
     <Compile Include="prd_mo.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="prd_pick.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="prd_ppbom.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="pur_po.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="sal_order.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="stk.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="sub_ppbom.py">

@@ -19,11 +19,11 @@ def findMaxId(tb,fieldId,eng=eng_t):
     r=eng.execute(sql)
     return r.fetchone()[0]
 
-def getKeyBillNo(tb:str,field:str="FBILLNO",eng=eng_t):
+def getKeyBillNo(tb:str,key:str="FID",field:str="FBILLNO",eng=eng_t):
     """
     从目标表中得到单据编号及主键FID
     """
-    sql=f"select FID,{field} from {tb};"
+    sql=f"select {key},{field} from {tb};"
     return pd.read_sql(sql,eng)
 
 def getPK(tb:str,key:str,eng=eng_t):
@@ -48,11 +48,16 @@ def getBillHeaderFromSourceByCreateDate(tb,start_date,end_date="",eng=eng_s):
 
 def getEntriesById(tbName:str,fieldId,fids,eng=eng_s):
     """
+    避免限制，需分两步来操作
     fids为df列
     """
-    _fids=str(tuple(fids.to_list()))
-    sql=f"select * from {tbName} where {fieldId} in {_fids}"
-    return pd.read_sql(sql,eng)
+    #_fids=str(tuple(fids.to_list()))
+
+    id_min=fids.min()
+    sql=f"select * from {tbName} where {fieldId} >= {id_min}"
+    _df=pd.read_sql(sql,eng)
+    _df=_df[_df[fieldId].isin(fids)]
+    return _df
 
 
 

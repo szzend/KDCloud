@@ -4,6 +4,10 @@ import pln_forecast
 import prd_ppbom
 import sub_reqorder
 import sub_ppbom
+import pur_po
+import bd
+import prd_pick
+import stk
 
 def start():
     """
@@ -17,8 +21,34 @@ def start():
     #prd_ppbom.do2(start_date)
     #sub_reqorder.do(start_date)
     #sub_reqorder.do2(start_date)
-    sub_ppbom.do(start_date)
-    sub_ppbom.do2(start_date)
+    #sub_ppbom.do(start_date)
+    #sub_ppbom.do2(start_date)
+    #pur_po.do1(start_date)
+    #pur_po.do2(start_date)
+    #bd.do1(start_date)
+    #bd.do2(start_date)
+    #bd.do3(start_date)
+    #prd_pick.do1(start_date)
+    #prd_pick.do2(start_date)
+    #prd_pick.do3(start_date)
+    #prd_pick.do4(start_date)
+    #prd_pick.do5(start_date)
+    #sub_reqorder.do3(start_date)
+    #sub_reqorder.do4(start_date)
+    #sub_reqorder.do5(start_date)
+    #sub_reqorder.do6(start_date)
+    #pur_po.do3(start_date)
+    #pur_po.do4(start_date)
+    pur_po.do5(start_date)
+    pur_po.do6(start_date)
+    stk.do1(start_date)
+    stk.do2(start_date)
+    stk.do3(start_date)
+    stk.do4(start_date)
+    stk.do5(start_date)
+    stk.do6(start_date)
+    stk.do7(start_date)
+    stk.do8(start_date)
 
 if __name__=="__main__":
     start()
