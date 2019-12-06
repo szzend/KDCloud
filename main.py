@@ -15,6 +15,11 @@ def start():
     start_date="2019-11-16"
     #pln_forecast.do(start_date) #预测单处理
     #sal_order.do(start_date)    #销售订单处理
+    sal_order.do2(start_date)
+    sal_order.do3(start_date)
+    sal_order.do4(start_date)
+    sal_order.do5(start_date)
+    sal_order.do6(start_date)
 
     #prd_mo.do(start_date)      #生产订单处理
     #prd_ppbom.do(start_date)    #生产用料清单处理
@@ -39,16 +44,17 @@ def start():
     #sub_reqorder.do6(start_date)
     #pur_po.do3(start_date)
     #pur_po.do4(start_date)
-    pur_po.do5(start_date)
-    pur_po.do6(start_date)
-    stk.do1(start_date)
-    stk.do2(start_date)
-    stk.do3(start_date)
-    stk.do4(start_date)
-    stk.do5(start_date)
-    stk.do6(start_date)
-    stk.do7(start_date)
-    stk.do8(start_date)
+    #pur_po.do5(start_date)
+    #pur_po.do6(start_date)
+    #stk.do1(start_date)
+    #stk.do2(start_date)
+    #stk.do3(start_date)
+    #stk.do4(start_date)
+    #stk.do5(start_date)
+    #stk.do6(start_date)
+    #stk.do7(start_date)
+    #stk.do8(start_date)
+    #stk.do9(start_date)
 
 if __name__=="__main__":
     start()

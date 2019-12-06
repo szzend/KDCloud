@@ -136,3 +136,21 @@ def do8(start_date:str,end_date:str=""):
     b.pEntry(tb_h,tb_R)
     b.pEntry(tb_e,tb_LK,headId="FENTRYID",entryId="FLINKID")  #源单各id映射待后续更正
     b.to_sql()
+
+
+def do9(start_date:str,end_date:str=""):
+    """
+    组装拆卸单处理
+    """
+    tb_h="T_STK_ASSEMBLY" #单据头表
+    tb_e="T_STK_ASSEMBLYPRODUCT" #主单据体表
+    tb_R="T_STK_ASSEMBLYPRODUCT_R"   #明细_关联信息
+    tb_LK="T_STK_ASSEMBLYPRODUCT_LK" #明细关联表 
+    tb_ee_1="T_STK_ASSEMBLYSUBITEM"  #组装/拆卸单子件表 FDETAILID FENTRYID
+    b=BillWorker()
+    b.pHead(tb_h,start_date,end_date)
+    b.pEntry(tb_h,tb_e)
+    b.pEntry(tb_h,tb_R)
+    b.pEntry(tb_e,tb_ee_1,headId="FENTRYID",entryId="FDETAILID")
+    b.pEntry(tb_e,tb_LK,headId="FENTRYID",entryId="FLINKID")  #源单各id映射待后续更正
+    b.to_sql()
