@@ -2,6 +2,7 @@ from BillWorker import BillWorker
 
 def do(start_date:str,end_date:str=""):
     """
+    销售订单
     """
     #T_SAL_ORDERTRACE,T_SAL_ORDERTRACEDETAIL,T_SAL_ORDERDISCDETAIL,T_SAL_ORDERENTRY_CRE 空表
     tb_h="T_SAL_ORDER" #单据头表
@@ -24,12 +25,16 @@ def do(start_date:str,end_date:str=""):
     b.pEntry(tb_h,tb_e_3)
     b.pEntry(tb_e_3,tb_ee_3,headId="FENTRYID",entryId="FDETAILID")
     b.pEntry(tb_h,tb_e)
-    b.pEntry(tb_h,tb_e1)
-    b.pEntry(tb_h,tb_e2)
-    b.pEntry(tb_h,tb_e3)
+    #b.pEntry(tb_h,tb_e1)
+    #b.pEntry(tb_h,tb_e2)
+    #b.pEntry(tb_h,tb_e3)
+    b.pEntryX(tb_e,tb_e2,tb_h)
+    b.pEntryX(tb_e,tb_e3,tb_h)
+    b.pEntryX(tb_e,tb_e1,tb_h)
+    b.pEntryX(tb_e,tb_R,tb_h)
     b.pEntry(tb_e,tb_ee_1,headId="FENTRYID",entryId="FDETAILID")
     b.pEntry(tb_e,tb_ee_2,headId="FENTRYID",entryId="FDETAILID")
-    b.pEntry(tb_h,tb_R)
+    #b.pEntry(tb_h,tb_R)
     b.pEntry(tb_e,tb_LK,headId="FENTRYID",entryId="FLINKID")  #源单各id映射待后续更正
     b.to_sql()
 
@@ -75,8 +80,10 @@ def do3(start_date:str,end_date:str=""):
     #b.pEntry(tb_e_3,tb_ee_3,headId="FENTRYID",entryId="FDETAILID")
     b.pEntry(tb_h,tb_e)
     #b.pEntry(tb_h,tb_e1)
-    b.pEntry(tb_h,tb_e2)
-    b.pEntry(tb_h,tb_e3)
+    #b.pEntry(tb_h,tb_e2)
+    #b.pEntry(tb_h,tb_e3)
+    b.pEntryX(tb_e,tb_e2,tb_h)
+    b.pEntryX(tb_e,tb_e3,tb_h)
     #b.pEntry(tb_e,tb_ee_1,headId="FENTRYID",entryId="FDETAILID")
     b.pEntry(tb_e,tb_ee_2,headId="FENTRYID",entryId="FDETAILID")
     #b.pEntry(tb_h,tb_R)
@@ -110,8 +117,10 @@ def do4(start_date:str,end_date:str=""):
     #b.pEntry(tb_e_3,tb_ee_3,headId="FENTRYID",entryId="FDETAILID")
     b.pEntry(tb_h,tb_e)
     #b.pEntry(tb_h,tb_e1)
-    b.pEntry(tb_h,tb_e2)
-    b.pEntry(tb_h,tb_e3)
+    #b.pEntry(tb_h,tb_e2)
+    b.pEntryX(tb_e,tb_e2,tb_h)
+    b.pEntryX(tb_e,tb_e3,tb_h)
+    #b.pEntry(tb_h,tb_e3)
     #b.pEntry(tb_e,tb_ee_1,headId="FENTRYID",entryId="FDETAILID")
     b.pEntry(tb_e,tb_ee_2,headId="FENTRYID",entryId="FDETAILID")
     #b.pEntry(tb_h,tb_R)
@@ -133,9 +142,11 @@ def do5(start_date:str,end_date:str=""):
     b.pHead(tb_h,start_date,end_date)
     b.pEntry(tb_h,tb_e)
     b.pEntry(tb_e,tb_ee_1,headId="FENTRYID",entryId="FDETAILID")
-    b.pEntry(tb_h,tb_e1)
+    #b.pEntry(tb_h,tb_e1)
+    b.pEntryX(tb_e,tb_e1,tb_h)
     b.pEntry(tb_h,tb_e_1)
-    b.pEntry(tb_h,tb_R)
+    #b.pEntry(tb_h,tb_R)
+    b.pEntryX(tb_e,tb_R,tb_h)
     b.pEntry(tb_e,tb_LK,headId="FENTRYID",entryId="FLINKID")  #源单各id映射待后续更正
     b.to_sql()
 
@@ -155,8 +166,18 @@ def do6(start_date:str,end_date:str=""):
     b.pHead(tb_h,start_date,end_date)
     b.pEntry(tb_h,tb_e)
     b.pEntry(tb_e,tb_ee_1,headId="FENTRYID",entryId="FDETAILID")
-    b.pEntry(tb_h,tb_e1)
+    #b.pEntry(tb_h,tb_e1)
+    b.pEntryX(tb_e,tb_e1,tb_h)
     b.pEntry(tb_h,tb_e_1)
-    b.pEntry(tb_h,tb_R)
+    #b.pEntry(tb_h,tb_R)
+    b.pEntryX(tb_e,tb_R,tb_h)
     b.pEntry(tb_e,tb_LK,headId="FENTRYID",entryId="FLINKID")  #源单各id映射待后续更正
     b.to_sql()
+
+def do7():
+    """
+    销售出库单销售退货单关系表
+    """
+    import fun
+    df=fun.pd.read_sql("select * from T_SAL_SALOUTRETURNTABLE",fun.eng_s)
+    df.to_sql("T_SAL_SALOUTRETURNTABLE",fun.eng_t,if_exists="replace",index=False)

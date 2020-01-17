@@ -14,7 +14,8 @@ def do(start_date:str,end_date:str=""):
     b.pHead(tb_h,start_date,end_date)
     b.pEntry(tb_h,tb_L,entryId="FPKID")
     b.pEntry(tb_h,tb_e)
-    b.pEntry(tb_h,tb_e1)
+    #b.pEntry(tb_h,tb_e1)
+    b.pEntryX(tb_e,tb_e1,tb_h)
     b.pEntry(tb_e,tb_eeL,headId="FENTRYID",entryId="FPKID")
     b.pEntry(tb_e,tb_LK,headId="FENTRYID",entryId="FLINKID")  #源单各id映射待后续更正
     b.to_sql()
@@ -33,7 +34,8 @@ def do2(start_date:str,end_date:str=""):
     b.pHead(tb_h,start_date,end_date)
     b.pEntry(tb_h,tb_L,entryId="FPKID")
     b.pEntry(tb_h,tb_e)
-    b.pEntry(tb_h,tb_e1)
+    #b.pEntry(tb_h,tb_e1)
+    b.pEntryX(tb_e,tb_e1,tb_h)
     b.pEntry(tb_e,tb_eeL,headId="FENTRYID",entryId="FPKID")
     b.pEntry(tb_e,tb_LK,headId="FENTRYID",entryId="FLINKID")  #源单各id映射待后续更正
     b.to_sql()
@@ -54,7 +56,8 @@ def do3(start_date:str,end_date:str=""):
     b.pHead(tb_h,start_date,end_date)
     b.pEntry(tb_h,tb_L,entryId="FPKID")
     b.pEntry(tb_h,tb_e)
-    b.pEntry(tb_h,tb_e1)
+    #b.pEntry(tb_h,tb_e1)
+    b.pEntryX(tb_e,tb_e1,tb_h)
     b.pEntry(tb_e,tb_eeL,headId="FENTRYID",entryId="FPKID")
     b.pEntry(tb_e,tb_LK,headId="FENTRYID",entryId="FLINKID")  #源单各id映射待后续更正
     b.to_sql()
@@ -74,7 +77,8 @@ def do4(start_date:str,end_date:str=""):
     b.pHead(tb_h,start_date,end_date)
     b.pEntry(tb_h,tb_L,entryId="FPKID")
     b.pEntry(tb_h,tb_e)
-    b.pEntry(tb_h,tb_e1)
+    #b.pEntry(tb_h,tb_e1)
+    b.pEntryX(tb_e,tb_e1,tb_h)
     b.pEntry(tb_e,tb_eeL,headId="FENTRYID",entryId="FPKID")
     b.pEntry(tb_e,tb_LK,headId="FENTRYID",entryId="FLINKID")  #源单各id映射待后续更正
     b.to_sql()
@@ -94,7 +98,8 @@ def do5(start_date:str,end_date:str=""):
     b.pHead(tb_h,start_date,end_date)
     b.pEntry(tb_h,tb_L,entryId="FPKID")
     b.pEntry(tb_h,tb_e)
-    b.pEntry(tb_h,tb_e1)
+    #b.pEntry(tb_h,tb_e1)
+    b.pEntryX(tb_e,tb_e1,tb_h)
     b.pEntry(tb_e,tb_eeL,headId="FENTRYID",entryId="FPKID")
     b.pEntry(tb_e,tb_LK,headId="FENTRYID",entryId="FLINKID")  #源单各id映射待后续更正
     b.to_sql()

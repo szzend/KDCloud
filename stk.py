@@ -19,12 +19,14 @@ def do1(start_date:str,end_date:str=""):
     b=BillWorker()
     b.pHead(tb_h,start_date,end_date)
     b.pEntry(tb_h,tb_e)
-    b.pEntry(tb_h,tb_e_1)
+    #b.pEntry(tb_h,tb_e_1)
+    b.pEntryX(tb_e,tb_e_1,tb_h)
     b.pEntry(tb_h,tb_e_2)
     b.pEntry(tb_e,tb_ee_3,headId="FENTRYID",entryId="FDETAILID")
     #b.pEntry(tb_e,tb_eeL,headId="FENTRYID",entryId="FPKID")
     #b.pEntry(tb_h,tb_e2)
-    b.pEntry(tb_h,tb_e3)
+    #b.pEntry(tb_h,tb_e3)
+    b.pEntryX(tb_e,tb_e3,tb_h)
     b.pEntry(tb_e,tb_ee_1,headId="FENTRYID",entryId="FDETAILID")
     b.pEntry(tb_e,tb_ee_2,headId="FENTRYID",entryId="FDETAILID")
     #b.pEntry(tb_h,tb_R)
@@ -55,7 +57,8 @@ def do3(start_date:str,end_date:str=""):
     b=BillWorker()
     b.pHead(tb_h,start_date,end_date)
     b.pEntry(tb_h,tb_e)
-    b.pEntry(tb_h,tb_R)
+    #b.pEntry(tb_h,tb_R)
+    b.pEntryX(tb_e,tb_R,tb_h)
     b.pEntry(tb_e,tb_LK,headId="FENTRYID",entryId="FLINKID")  #源单各id映射待后续更正
     b.to_sql()
 
@@ -71,7 +74,8 @@ def do4(start_date:str,end_date:str=""):
     b=BillWorker()
     b.pHead(tb_h,start_date,end_date)
     b.pEntry(tb_h,tb_e)
-    b.pEntry(tb_h,tb_R)
+    #b.pEntry(tb_h,tb_R)
+    b.pEntryX(tb_e,tb_R,tb_h)
     b.pEntry(tb_e,tb_LK,headId="FENTRYID",entryId="FLINKID")  #源单各id映射待后续更正
     b.to_sql()
 
@@ -86,7 +90,8 @@ def do5(start_date:str,end_date:str=""):
     b=BillWorker()
     b.pHead(tb_h,start_date,end_date)
     b.pEntry(tb_h,tb_e)
-    b.pEntry(tb_h,tb_R)
+    #b.pEntry(tb_h,tb_R)
+    b.pEntryX(tb_e,tb_R,tb_h)
     b.pEntry(tb_e,tb_LK,headId="FENTRYID",entryId="FLINKID")  #源单各id映射待后续更正
     b.to_sql()
 
@@ -131,9 +136,12 @@ def do8(start_date:str,end_date:str=""):
     b=BillWorker()
     b.pHead(tb_h,start_date,end_date)
     b.pEntry(tb_h,tb_e)
-    b.pEntry(tb_h,tb_e_1)
-    b.pEntry(tb_h,tb_e_2)
-    b.pEntry(tb_h,tb_R)
+    b.pEntryX(tb_e,tb_e_1,tb_h)
+    b.pEntryX(tb_e,tb_e_2,tb_h)
+    b.pEntryX(tb_e,tb_R,tb_h)
+    #b.pEntry(tb_h,tb_e_1)
+    #b.pEntry(tb_h,tb_e_2)
+    #b.pEntry(tb_h,tb_R)
     b.pEntry(tb_e,tb_LK,headId="FENTRYID",entryId="FLINKID")  #源单各id映射待后续更正
     b.to_sql()
 
@@ -150,7 +158,8 @@ def do9(start_date:str,end_date:str=""):
     b=BillWorker()
     b.pHead(tb_h,start_date,end_date)
     b.pEntry(tb_h,tb_e)
-    b.pEntry(tb_h,tb_R)
+    #b.pEntry(tb_h,tb_R)
+    b.pEntryX(tb_e,tb_R,tb_h)
     b.pEntry(tb_e,tb_ee_1,headId="FENTRYID",entryId="FDETAILID")
     b.pEntry(tb_e,tb_LK,headId="FENTRYID",entryId="FLINKID")  #源单各id映射待后续更正
     b.to_sql()

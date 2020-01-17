@@ -24,7 +24,7 @@ class BillWorker:
         fid=head[head[fieldId].isin(billNo[fieldId])][fieldId] #找出冲突的主键FID
         if not fid.empty:   #有冲突主键时须记录映射并修改数据表
             _source=fid.sort_values().to_list()
-            _m=pd.DataFrame({"source":_source,"to":[i for i in range(9000,len(_source)+9000)]})   #从9000开始对重复键做映射
+            _m=pd.DataFrame({"source":_source,"to":[i for i in range(9212,len(_source)+9212)]})   #从9000开始对重复键做映射
             _df=head.merge(_m,how="left",left_on=fieldId,right_on="source") 
             _s=_df["to"].fillna(_df[fieldId]).astype('int32')  #填充非映射键
             _map=pd.DataFrame({"source":_df[fieldId],"to":_s})
@@ -59,7 +59,7 @@ class BillWorker:
         if not _pk_t.empty:
             #注意列赋值时会进行索引对齐
             _source=_pk_t.sort_values().to_list()
-            _m=pd.DataFrame({"source":_source,"to":[i for i in range(6000,len(_source)+6000)]})   #从6000开始对重复键做映射
+            _m=pd.DataFrame({"source":_source,"to":[i for i in range(6515,len(_source)+6515)]})   #从6000开始对重复键做映射
             _df=_data.merge(_m,how="left",left_on=entryId,right_on="source") 
             _s=_df["to"].fillna(_df[entryId]).astype('int32')  #填充非映射键
             _map=pd.DataFrame({"source":_df[entryId],"to":_s})
@@ -86,6 +86,33 @@ class BillWorker:
             _df=_df.drop(columns=["source","to"])
             self.data_todo[entryTb]=_df
 
+    def pEntryX(self,headTb:str,entryTb:str,topTb:str,headId:str="FENTRYID",topId:str="FID"):
+        """
+        headTb为主子表，entryTb为从子表。默认主键FENTRYID,topTb为单据头表,默认主键为FID
+        """
+        if headTb not in self.data_map.keys():  #无数据需处理，返回
+            return
+        _id=self.data_map[headTb]["source"]
+        _data=fun.getEntriesById(entryTb,headId,_id) #源表数据
+        if _data.empty:
+            print(f"{entryTb}表中无新增数据..")
+            return
+            #替换主表主键映射
+        _map=self.data_map[headTb].copy()
+        _map.loc[:,"tb"]=entryTb
+        self.data_map[entryTb]=_map
+        _m1=self.data_map[headTb][["source","to"]]
+        _df=_data.merge(_m1,how="left",left_on=headId,right_on="source") #不会存在合并列中出现N/A
+        _df.loc[:,headId]=_df["to"]
+        _df=_df.drop(columns=["source","to"])
+        _m2=self.data_map[topTb][["source","to"]]
+        _df=_df.merge(_m2,how="left",left_on=topId,right_on="source") #不会存在合并列中出现N/A
+        _df.loc[:,topId]=_df["to"]
+        _df=_df.drop(columns=["source","to"])
+        self.data_todo[entryTb]=_df
+
+
+
 
     def to_sql(self,toTb:str="qnwb_id_map"):
         """
@@ -99,6 +126,7 @@ class BillWorker:
             for tb in self.data_map.keys():
                 print(f"写入表键映射:{tb}...")
                 self.data_map[tb].to_sql(name=toTb,con=conn, if_exists='append',index=False)
+
 
 
     def pHead_b(self,headTb:str,start_date:str,end_date="",fieldId:str="FID",fNo:str="FNUMBER"):

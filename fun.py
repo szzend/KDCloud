@@ -1,9 +1,10 @@
 import os
 from sqlalchemy import create_engine
 import pandas as pd
+import datetime
 #指定数据库
 eng_s=create_engine(os.environ["TOSNC"])    #源
-eng_t=create_engine(os.environ["Toxx"])     #目标
+eng_t=create_engine(os.environ["To200"])     #目标
 #conn_s=eng_s.connect()
 #conn_t=eng_t.connect()
 
@@ -40,9 +41,18 @@ def getBillHeaderFromSourceByCreateDate(tb,start_date,end_date="",eng=eng_s):
     """
     s=""
     if end_date:
-        s=f" AND FCREATEDATE<='{end_date}'"
-    sql=f"select * from {tb} where FCREATEDATE>='{start_date}'{s}"
-    return pd.read_sql(sql,eng)
+        s=f" AND FCREATEDATE<'{end_date}'"
+    #sql=f"select * from {tb} where FCREATEDATE>='{start_date}'  {s}"
+    #sql=f"select * from T_SAL_DELIVERYNOTICE where FBILLNO in ('FHTZD191231014','FHTZD200104011')"
+    #sql=f"select * from T_SAL_OUTSTOCK where FBILLNO in ('XSCKD200109018','XSCKD200109019','XSCKD200109020')"
+    sql=f"select * from T_PRD_INSTOCK where FBILLNO in ('SCRK200109326')"
+
+
+    df= pd.read_sql(sql,eng)
+    fdate=datetime.datetime.strptime("2020-02-01","%Y-%m-%d")
+    if "FDATE" in df.keys():
+        return df[df["FDATE"]<fdate]
+    return df
 
 
 
@@ -62,7 +72,25 @@ def getEntriesById(tbName:str,fieldId,fids,eng=eng_s):
 
 
 
-
+def pInstance(s,eng):
+    """
+    检查t_bf_instanceentry中无效项(目标FTID不存在)
+    s为Series
+    """
+    df=pd.DataFrame()
+    
+    for ss in s:
+        sql="""select * from T_BF_INSTANCEENTRY e where not exists (select 1 from {0} t where t.fentryid=e.FTID and e.FTTABLENAME='{1}') and e.FTTABLENAME='{2}'"""
+        if ss[-1:].isdigit():
+            tb=ss[:-1]
+        else:
+            tb=ss
+        sql=sql.format(tb,ss,ss)
+        _df=pd.read_sql(sql,eng)
+        print(f"{tb}:{len(_df)}")
+        if len(_df)>0:
+            df=df.append(_df)
+    df.to_sql("t_bf_instanceentry_qnwb_todelete",eng, if_exists='append', index=False)
 
 
 

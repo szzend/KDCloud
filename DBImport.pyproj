@@ -28,10 +28,16 @@
     <Compile Include="BillWorker.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="clean.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="fun.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="main.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="orm.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="pln_forecast.py">

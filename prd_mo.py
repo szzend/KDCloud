@@ -8,24 +8,82 @@ def do(start_date:str,end_date:str=""):
     tb_L="T_PRD_MO_L"
     tb_e="T_PRD_MOENTRY" #主单据体表
     tb_e1="T_PRD_MOENTRY_A"
+    tb_eeL="T_PRD_MOENTRY_L"
     tb_e2="T_PRD_MOENTRY_Q"
-    tb_eeL="T_PRD_MORPTENTRY_L"
     tb_LK="T_PRD_MOENTRY_LK"
     b=BillWorker()
     b.pHead(tb_h,start_date,end_date)
     b.pEntry(tb_h,tb_L,entryId="FPKID")
     b.pEntry(tb_h,tb_e)
-    b.pEntry(tb_h,tb_e1)
-    b.pEntry(tb_h,tb_e2)
+    #b.pEntry(tb_h,tb_e1)
+    #b.pEntry(tb_h,tb_e2)
+    b.pEntryX(tb_e,tb_e1,tb_h)
+    b.pEntryX(tb_e,tb_e2,tb_h)
     b.pEntry(tb_e,tb_eeL,headId="FENTRYID",entryId="FPKID")
     b.pEntry(tb_e,tb_LK,headId="FENTRYID",entryId="FLINKID")  #源单各id映射待后续更正
     b.to_sql()
 
-def updateLK():
+def do2(start_date:str,end_date:str=""):
     """
-    待实现
+    生产订单变更单
     """
+    tb_h="T_PRD_MOCHANGE" #单据头表
+    tb_L="T_PRD_MOCHANGE_L"
+    tb_e="T_PRD_MOCHANGEENTRY" #主单据体表
+    tb_e1="T_PRD_MOCHANGEENTRY_A"
+    tb_eeL="T_PRD_MOCHANGEENTRY_L"
+    tb_LK="T_PRD_MOCHANGEENTRY_LK"
+    b=BillWorker()
+    b.pHead(tb_h,start_date,end_date)
+    b.pEntry(tb_h,tb_L,entryId="FPKID")
+    b.pEntry(tb_h,tb_e)
+    #b.pEntry(tb_h,tb_e1)
+    b.pEntryX(tb_e,tb_e1,tb_h)
+    b.pEntry(tb_e,tb_eeL,headId="FENTRYID",entryId="FPKID")
+    b.pEntry(tb_e,tb_LK,headId="FENTRYID",entryId="FLINKID")  #源单各id映射待后续更正
+    b.to_sql()
 
+
+def do3(start_date:str,end_date:str=""):
+    """
+    生产汇报单处理
+    """
+    tb_h="T_PRD_MORPT" #单据头表
+    tb_L="T_PRD_MORPT_L"
+    tb_e="T_PRD_MORPTENTRY" #主单据体表
+    tb_e1="T_PRD_MORPTENTRY_A"
+    tb_eeL="T_PRD_MORPTENTRY_L"
+    tb_LK="T_PRD_MORPTENTRY_LK"
+    b=BillWorker()
+    b.pHead(tb_h,start_date,end_date)
+    b.pEntry(tb_h,tb_L,entryId="FPKID")
+    b.pEntry(tb_h,tb_e)
+    #b.pEntry(tb_h,tb_e1)
+    b.pEntryX(tb_e,tb_e1,tb_h)
+    b.pEntry(tb_e,tb_eeL,headId="FENTRYID",entryId="FPKID")
+    b.pEntry(tb_e,tb_LK,headId="FENTRYID",entryId="FLINKID")  #源单各id映射待后续更正
+    b.to_sql()
+
+
+def do4(start_date:str,end_date:str=""):
+    """
+    检验单
+    """
+    tb_h="T_QM_INSPECTBILL" #单据头表
+    tb_L="T_QM_INSPECTBILL_L"
+    tb_e="T_QM_INSPECTBILLENTRY" #主单据体表
+    tb_e1="T_QM_INSPECTBILLENTRY_A"
+    tb_eeL="T_QM_INSPECTBILLENTRY_L"
+    tb_LK="T_QM_INSPECTBILLENTRY_LK"
+    b=BillWorker()
+    b.pHead(tb_h,start_date,end_date)
+    b.pEntry(tb_h,tb_L,entryId="FPKID")
+    b.pEntry(tb_h,tb_e)
+    #b.pEntry(tb_h,tb_e1)
+    b.pEntryX(tb_e,tb_e1,tb_h)
+    b.pEntry(tb_e,tb_eeL,headId="FENTRYID",entryId="FPKID")
+    b.pEntry(tb_e,tb_LK,headId="FENTRYID",entryId="FLINKID")  #源单各id映射待后续更正
+    b.to_sql()
 
 
 

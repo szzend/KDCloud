@@ -1,14 +1,30 @@
 import os
 from sqlalchemy import create_engine
 import pandas as pd
-eng=create_engine(os.environ["TOSNC"])
-sql=r"update T_PRD_PPBOMENTRY_C set FSTOCKID={0} where FENTRYID={1}"
+import fun
+eng=create_engine(os.environ["SNC200"])
 input("复制数据后按回车键继续...")
 df=pd.read_clipboard()
-vv=df.values.tolist()
+s=df["FTTABLENAME"]
 
-for v in vv:
-    sql=sql.format(v[1],v[0])
-    eng.execute(sql)
-    print(v[0]," done")
+fun.pInstance(s,eng)
 
+def do(eng,df):
+    todo=df.values.tolist()
+    result=pd.DataFrame()
+    for t in todo:
+        sql=f"select min({t[2]}),max({t[2]}) from {t[0]}"
+        print(sql)
+        _df=pd.read_sql(sql,eng)
+        result=result.append(_df)
+    return result
+
+def do(eng,tbs):
+    df=pd.DataFrame()
+    _tbs=tbs["tb"].values.tolist()
+    for tb in _tbs:
+        sql=f"select FSTABLENAME,FSBILLID,FSID from {tb};"
+        _df=pd.read_sql(sql,eng)
+        _df["tb"]=tb
+        df=df.append(_df)
+    return df
